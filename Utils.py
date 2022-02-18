@@ -3,6 +3,6 @@ def ConvertListToDict(list):
     letterDict = {chr(i+65) : list[i] for i in range(0,len(list))}
     return letterDict
 
-def sortDict(dict):
-    res = {key : val for key,val in sorted(dict.items(), key=lambda ele: ele[1], reverse= True)}
+def sortDict(dict,rev = True):
+    res = {key : val for key,val in sorted(dict.items(), key=lambda ele: ele[1], reverse= rev)}
     return res

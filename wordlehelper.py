@@ -1,4 +1,3 @@
-from importlib.util import find_spec
 import Utils
 
 WORDS_NUMBER = 411430
@@ -53,21 +52,24 @@ def findWords(size, letterException = [], temoin = []) :
                     isPossible = False
             if isPossible:
                 score = 0
+                alreadyRead = []
                 for k in x[:-1]:
-                    score += letterDict[k]
+                    if k not in alreadyRead:
+                        score += letterDict[k]
+                        alreadyRead.append(k)
                 words[x[:-1]] = score
                 
     f.close()
     return words
 
-letterToAvoid = []
-temoin = setTemoin(5)
+letterToAvoid = ['A','I','R','S','N','U','T','C','H','M','Y','D']
+temoin = ['?','?','?','?','E']
 wordSize = len(temoin)
 
 (counter,numberOfWords) = countLetterByWordsWithCriterias(wordSize,letterToAvoid,-1)
 letterDict = Utils.ConvertListToDict(counter)
 w = findWords(wordSize,letterToAvoid,temoin)
-print(Utils.sortDict(w))
+print(Utils.sortDict(w,False))
 
 # findWords(5)
 
