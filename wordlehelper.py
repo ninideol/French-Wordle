@@ -2,8 +2,6 @@ import Utils
 
 WORDS_NUMBER = 411430
 
-letterDict = {}
-
 def countLetterByWordsWithCriterias(size, letterException = [], firstLetter = -1):
     f = open("mots.txt",'r')
     counter = [0 for i in range(26)]
@@ -29,7 +27,8 @@ def countLetterByWordsWithCriterias(size, letterException = [], firstLetter = -1
                 numberOfWords += 1
     
     f.close()
-    return (counter,numberOfWords)
+    letterDict = Utils.ConvertListToDict(counter)
+    return letterDict
     
 def setTemoin(size,firstLetter = -1):
     temoin = []
@@ -39,7 +38,7 @@ def setTemoin(size,firstLetter = -1):
         temoin[0] = firstLetter
     return temoin
         
-def findWords(size, letterException = [], temoin = []) :
+def findWords(size, letterDict, letterException = [], temoin = []) :
     f = open("mots.txt",'r')
     words = {}
 
@@ -61,15 +60,6 @@ def findWords(size, letterException = [], temoin = []) :
                 
     f.close()
     return words
-
-letterToAvoid = ['A','I','R','S','N','U','T','C','H','M','Y','D']
-temoin = ['?','?','?','?','E']
-wordSize = len(temoin)
-
-(counter,numberOfWords) = countLetterByWordsWithCriterias(wordSize,letterToAvoid,-1)
-letterDict = Utils.ConvertListToDict(counter)
-w = findWords(wordSize,letterToAvoid,temoin)
-print(Utils.sortDict(w,False))
 
 # findWords(5)
 
