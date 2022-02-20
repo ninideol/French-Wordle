@@ -1,3 +1,4 @@
+from logging.config import stopListening
 import Utils
 import wordlehelper
 
@@ -23,8 +24,15 @@ def setTemoin(word,res):
 while '?' in temoin:
     letterDict = wordlehelper.countLetterByWordsWithCriterias(size,toAvoid,-1)
     w = wordlehelper.findWords(size,letterDict,toAvoid,temoin)
-    print(Utils.sortDict(w,False))
+    sortedDict = Utils.sortDict(w,False)
+    bestWords = []
+    for i in range(10):
+        theWord = sortedDict.popitem()
+        print(i," : ",theWord)
+        bestWords.append(theWord)
     print(toAvoid)
     print(temoin)
-    word = input("Word choosen ? ")
+    wordNumber =  int(input("Word choosen ? (Number) "))
+    word = bestWords[wordNumber]
+    print("--->",word[0])
     isITGood(word)
