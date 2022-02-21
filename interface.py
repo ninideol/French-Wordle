@@ -27,12 +27,14 @@ while '?' in temoin:
     sortedDict = Utils.sortDict(w,False)
     bestWords = []
     for i in range(10):
-        theWord = sortedDict.popitem()
-        print(i," : ",theWord)
-        bestWords.append(theWord)
+        if len(sortedDict) != 0:
+            theWord = sortedDict.popitem()
+            print(i," : ",theWord)
+            bestWords.append(theWord)
+        else : break
     print(toAvoid)
     print(temoin)
     wordNumber =  int(input("Word choosen ? (Number) "))
     word = bestWords[wordNumber]
     print("--->",word[0])
-    isITGood(word)
+    isITGood(word[0])
