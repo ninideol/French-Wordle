@@ -2,7 +2,7 @@ import Utils
 
 WORDS_NUMBER = 411430
 
-def countLetterByWordsWithCriterias(size, letterException = [], temoin = []):
+def countLetterByWordsWithCriterias(size, temoin = [],goodLetter = []):
     f = open("mots.txt",'r')
     counter = [0 for i in range(26)]
     words = {}
@@ -12,8 +12,12 @@ def countLetterByWordsWithCriterias(size, letterException = [], temoin = []):
         isPossible = True
         if len(x) == size+1:
             for y in range(len(x)-1):
-                if (temoin[y] != '?' and temoin[y] != x[y]) or (temoin[y] == '?' and x[y] in letterException):
+                if not temoin[y].__contains__(x[y]):
                     isPossible = False
+                else:
+                    for j in goodLetter:
+                        if not x.__contains__(j):
+                            isPossible = False
             if isPossible:
                 alreadyRead = []
                 for k in x[:-1]:
@@ -27,12 +31,15 @@ def countLetterByWordsWithCriterias(size, letterException = [], temoin = []):
 def setTemoin(size,firstLetter = -1):
     temoin = []
     for i in range(size):
-        temoin.append('?')
+        temp = []
+        for j in range(26):
+            temp.append(chr(j+65))
+        temoin.append(temp)
     if firstLetter != -1:
         temoin[0] = firstLetter
     return temoin
         
-def findWords(size, letterDict, letterException = [], temoin = []) :
+def findWords(size, letterDict, temoin = [],goodLetter = []) :
     f = open("mots.txt",'r')
     words = {}
 
@@ -41,8 +48,12 @@ def findWords(size, letterDict, letterException = [], temoin = []) :
         isPossible = True
         if len(x) == size+1:
             for y in range(len(x)-1):
-                if (temoin[y] != '?' and temoin[y] != x[y]) or (temoin[y] == '?' and x[y] in letterException):
+                if not temoin[y].__contains__(x[y]):
                     isPossible = False
+                else:
+                    for j in goodLetter:
+                        if not x.__contains__(j):
+                            isPossible = False
             if isPossible:
                 score = 0
                 alreadyRead = []
