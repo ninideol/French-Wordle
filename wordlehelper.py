@@ -1,11 +1,28 @@
+"""
+--> WordleHelper :
+    Core of the functions
+"""
+
 import Utils
 
+# Numbers of the words in "mots.txt"
 WORDS_NUMBER = 411430
 
 def countLetterByWordsWithCriterias(size, temoin = [],goodLetter = []):
+    '''Count all the letter if all words following the criterias in parameters
+
+    :param size: size of the words
+    :type size: int
+    :param temoin: Temoin of the word
+    :type temoin: string list list
+    :param goodLetter: list of the goodLetter but badplace in the word
+    :type goodLetter: char list
+
+    :returns: For each letter, the number of words with the letter in it
+    :rtype: dict
+    '''
     f = open("mots.txt",'r')
     counter = [0 for i in range(26)]
-    words = {}
 
     for i in range(WORDS_NUMBER):
         x = f.readline()
@@ -27,19 +44,44 @@ def countLetterByWordsWithCriterias(size, temoin = [],goodLetter = []):
     f.close()
     letterDict = Utils.ConvertListToDict(counter)
     return letterDict
-    
-def setTemoin(size,firstLetter = -1):
+
+def setTemoin(size,firstLetter = '\n'):
+    '''Create the temoin of the word and then return it
+
+    :param size: size of the word
+    :type size: int
+    :param firstLetter: first letter of the word
+    :type firstLetter: char
+
+    :returns: the temoin of this new word considering the parameters
+    :rtype: str list list
+    '''
     temoin = []
     for i in range(size):
         temp = []
         for j in range(26):
             temp.append(chr(j+65))
         temoin.append(temp)
-    if firstLetter != -1:
-        temoin[0] = firstLetter
+    if firstLetter != '\n':
+        temoin[0] = [firstLetter]
     return temoin
         
 def findWords(size, letterDict, temoin = [],goodLetter = []) :
+    '''Return find the words following the criterias un parameters.
+
+    :param size: size of the words
+    :type size: int
+    :param letterDict: percentage og the letter in all wards
+    :type letterDict: dict
+    :param temoin: Temoin of the word
+    :type temoin: string list list
+    :param goodLetter: list of the goodLetter but badplace in the word
+    :type goodLetter: char list
+
+    :returns: All the words following the criterias
+    :rtype: string int tuple list
+    '''
+
     f = open("mots.txt",'r')
     words = {}
 
@@ -65,8 +107,6 @@ def findWords(size, letterDict, temoin = [],goodLetter = []) :
                 
     f.close()
     return words
-
-# findWords(5)
 
 # ALL LETTERS  
 # A :  403734

@@ -1,3 +1,8 @@
+"""
+--> Utils :
+    Some utils functions for the code.
+"""
+
 def ConvertListToDict(list):
     l = 65
     letterDict = {chr(i+65) : list[i] for i in range(0,len(list))}
