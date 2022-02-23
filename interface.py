@@ -22,7 +22,7 @@ def setTemoin(word,res):
             toAvoid.append(word[i])
 
 while '?' in temoin:
-    letterDict = wordlehelper.countLetterByWordsWithCriterias(size,toAvoid,-1)
+    letterDict = wordlehelper.countLetterByWordsWithCriterias(size,toAvoid,temoin)
     w = wordlehelper.findWords(size,letterDict,toAvoid,temoin)
     sortedDict = Utils.sortDict(w,False)
     bestWords = []
@@ -38,3 +38,5 @@ while '?' in temoin:
     word = bestWords[wordNumber]
     print("--->",word[0])
     isITGood(word[0])
+
+print("\n##> BRAVO VOUS AVEZ TROUVÉ")

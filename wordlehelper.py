@@ -2,29 +2,23 @@ import Utils
 
 WORDS_NUMBER = 411430
 
-def countLetterByWordsWithCriterias(size, letterException = [], firstLetter = -1):
+def countLetterByWordsWithCriterias(size, letterException = [], temoin = []):
     f = open("mots.txt",'r')
     counter = [0 for i in range(26)]
-    numberOfWords = 0
-    cond = True
+    words = {}
 
     for i in range(WORDS_NUMBER):
         x = f.readline()
         isPossible = True
-        if firstLetter != -1:
-            cond = len(x) == size+1 and x[0] == firstLetter
-        else:
-            cond = len(x) == size+1
-        if cond :
-            for i in letterException:
-                if x.__contains__(str(i)):
+        if len(x) == size+1:
+            for y in range(len(x)-1):
+                if (temoin[y] != '?' and temoin[y] != x[y]) or (temoin[y] == '?' and x[y] in letterException):
                     isPossible = False
-                    break
             if isPossible:
-                for i in range(26):
-                    if x[1:].__contains__(chr(i+65)):
-                        counter[i] += 1
-                numberOfWords += 1
+                alreadyRead = []
+                for k in x[:-1]:
+                    if k not in alreadyRead:
+                        counter[ord(k)-65] += 1
     
     f.close()
     letterDict = Utils.ConvertListToDict(counter)
