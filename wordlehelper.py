@@ -1,44 +1,66 @@
+"""
+--> WordleHelper :
+    Core of the functions
+"""
+
 import Utils
 
+# Numbers of the words in "mots.txt"
 WORDS_NUMBER = 411430
 
-def countLetterByWordsWithCriterias(size, letterException = [], firstLetter = -1):
+def countLetterByWordsWithCriterias(size, temoin = [],goodLetter = []):
+    '''Count all the letter if all words following the criterias in parameters
+
+    :param size: size of the words
+    :type size: int
+    :param temoin: Temoin of the word
+    :type temoin: string list list
+    :param goodLetter: list of the goodLetter but badplace in the word
+    :type goodLetter: char list
+
+    :returns: For each letter, the number of words with the letter in it
+    :rtype: dict
+    '''
     f = open("mots.txt",'r')
     counter = [0 for i in range(26)]
-    numberOfWords = 0
-    cond = True
 
     for i in range(WORDS_NUMBER):
         x = f.readline()
         isPossible = True
-        if firstLetter != -1:
-            cond = len(x) == size+1 and x[0] == firstLetter
-        else:
-            cond = len(x) == size+1
-        if cond :
-            for i in letterException:
-                if x.__contains__(str(i)):
+        if len(x) == size+1:
+            for y in range(len(x)-1):
+                if not temoin[y].__contains__(x[y]):
                     isPossible = False
-                    break
+                else:
+                    for j in goodLetter:
+                        if not x.__contains__(j):
+                            isPossible = False
             if isPossible:
-                for i in range(26):
-                    if x[1:].__contains__(chr(i+65)):
-                        counter[i] += 1
-                numberOfWords += 1
+                alreadyRead = []
+                for k in x[:-1]:
+                    if k not in alreadyRead:
+                        counter[ord(k)-65] += 1
     
     f.close()
     letterDict = Utils.ConvertListToDict(counter)
     return letterDict
-    
-def setTemoin(size,firstLetter = -1):
-    temoin = []
-    for i in range(size):
-        temoin.append('?')
-    if firstLetter != -1:
-        temoin[0] = firstLetter
-    return temoin
         
-def findWords(size, letterDict, letterException = [], temoin = []) :
+def findWords(size, letterDict, temoin = [],goodLetter = []) :
+    '''Return find the words following the criterias un parameters.
+
+    :param size: size of the words
+    :type size: int
+    :param letterDict: percentage og the letter in all wards
+    :type letterDict: dict
+    :param temoin: Temoin of the word
+    :type temoin: string list list
+    :param goodLetter: list of the goodLetter but badplace in the word
+    :type goodLetter: char list
+
+    :returns: All the words following the criterias
+    :rtype: string int tuple list
+    '''
+
     f = open("mots.txt",'r')
     words = {}
 
@@ -47,8 +69,12 @@ def findWords(size, letterDict, letterException = [], temoin = []) :
         isPossible = True
         if len(x) == size+1:
             for y in range(len(x)-1):
-                if (temoin[y] != '?' and temoin[y] != x[y]) or (temoin[y] == '?' and x[y] in letterException):
+                if not temoin[y].__contains__(x[y]):
                     isPossible = False
+                else:
+                    for j in goodLetter:
+                        if not x.__contains__(j):
+                            isPossible = False
             if isPossible:
                 score = 0
                 alreadyRead = []
@@ -60,8 +86,6 @@ def findWords(size, letterDict, letterException = [], temoin = []) :
                 
     f.close()
     return words
-
-# findWords(5)
 
 # ALL LETTERS  
 # A :  403734
