@@ -44,27 +44,6 @@ def countLetterByWordsWithCriterias(size, temoin = [],goodLetter = []):
     f.close()
     letterDict = Utils.ConvertListToDict(counter)
     return letterDict
-
-def setTemoin(size,firstLetter = '\n'):
-    '''Create the temoin of the word and then return it
-
-    :param size: size of the word
-    :type size: int
-    :param firstLetter: first letter of the word
-    :type firstLetter: char
-
-    :returns: the temoin of this new word considering the parameters
-    :rtype: str list list
-    '''
-    temoin = []
-    for i in range(size):
-        temp = []
-        for j in range(26):
-            temp.append(chr(j+65))
-        temoin.append(temp)
-    if firstLetter != '\n':
-        temoin[0] = [firstLetter]
-    return temoin
         
 def findWords(size, letterDict, temoin = [],goodLetter = []) :
     '''Return find the words following the criterias un parameters.
