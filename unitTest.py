@@ -35,7 +35,14 @@ class SimpleTest(unittest.TestCase):
         self.assertFalse(testWords.endGame(badWord5))
         self.assertFalse(testWords.endGame(badWord10))
 
-
+    def test_printTemoin(self):
+        temoin1 = [['R'],['R','T']]
+        temoin2 = [[],['T'],['E'],['S'],['T']]
+        temoinEmpty = []
+        self.assertEqual(temoin.printTemoin(temoin1),"R_")
+        self.assertEqual(temoin.printTemoin(temoin2),"_TEST")
+        self.assertNotEqual(temoin.printTemoin(temoin2),"R_")
+        self.assertNotEqual(temoin.printTemoin(temoinEmpty),"R_")        
 
 if __name__=='__main__':
     unittest.main()

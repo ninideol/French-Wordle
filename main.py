@@ -3,6 +3,16 @@ import wordlehelper
 import temoin
 import testWords
 
+def printError(number,theTemoin=""):
+    print("\n--ERROR--")
+    if number==0:
+        print("According to our database, there is no words left =(")
+        print("Your word looks like this : ", temoin.printTemoin(theTemoin))
+    if number==1:
+        print("Your choice is too high or too low =(")
+        print("Try another one !")
+    print("--ERROR--\n")
+
 if __name__=='__main__':
 
     print("Welcome to this helper for Sutom and French Wordle !")
@@ -33,7 +43,18 @@ if __name__=='__main__':
                 bestWords.append(theWord)
             else : break
             
+        #Check if there is words
+        if len(bestWords) == 0 : 
+            printError(0,theTemoin)
+            break
+
         wordNumber =  int(input("Word choosen ? (Number) "))
+
+        #Check if the input is possible
+        if wordNumber > len(bestWords)-1 or wordNumber < 0:
+            printError(1)
+            continue
+
         word = bestWords[wordNumber]
         print("--->",word[0])
         print("How good is this word ? ")
@@ -41,4 +62,4 @@ if __name__=='__main__':
         isFound = testWords.endGame(res)
         (theTemoin,toHave) = temoin.setTemoin(theTemoin,toHave,word[0],res)
 
-    print("\n##> WELL DONE")
+    if isFound: print("\n##> WELL DONE")

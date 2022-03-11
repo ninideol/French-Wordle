@@ -49,3 +49,10 @@ def setTemoin(temoin,toHave,word,res):
                     if word[i] in k: k.remove(word[i])
             alreadyTried.append(word[i])
     return (temoin,toHave)
+
+def printTemoin(temoin):
+    toWrite = ""
+    for i in temoin:
+        if len(i) != 1: toWrite += "_"
+        else: toWrite += i[0]
+    return toWrite
