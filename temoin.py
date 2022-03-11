@@ -51,6 +51,13 @@ def setTemoin(temoin,toHave,word,res):
     return (temoin,toHave)
 
 def printTemoin(temoin):
+    '''
+    :param temoin:
+    :type temoin: str list list
+    
+    :returns: the words good written with '_' as blank spaces
+    :rtype: string
+    '''
     toWrite = ""
     for i in temoin:
         if len(i) != 1: toWrite += "_"
