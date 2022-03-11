@@ -33,8 +33,6 @@ if __name__=='__main__':
         sortedDict = Utils.sortDict(word,False)
         bestWords = []
 
-        print("Good Letter, Bad Place : ",toHave)
-
         #Find the best words and show them
         for i in range(10):
             if len(sortedDict) != 0:
