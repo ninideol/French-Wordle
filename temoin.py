@@ -63,3 +63,6 @@ def printTemoin(temoin):
         if len(i) != 1: toWrite += "_"
         else: toWrite += i[0]
     return toWrite
+
+def t:
+	return 1
