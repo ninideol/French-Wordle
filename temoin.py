@@ -64,5 +64,10 @@ def printTemoin(temoin):
         else: toWrite += i[0]
     return toWrite
 
+<<<<<<< HEAD
 def testfunction(t):
 	return t
+=======
+def t:
+	return 1
+>>>>>>> 201bba2 (Test)
